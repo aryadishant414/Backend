@@ -1,1 +1,38 @@
-Backend using Javascript
+************** Backend using Javascript *************
+
+
+
+***************************** Video 2 (How to deploy backend code in production) ********************************
+Steps : 
+        1. we have created a folder "chaideploy".
+
+        2. we have run a command `npm init' ->
+         -> This command will make a 'package.json' file.
+
+         'init' is just a "utility" just like 'vite' , 'react'. this command will initialise an application jese hamm react and vite sai application banate the for creating our react application.
+         
+       
+
+        3. created a 'index.js' file and write our own scripts (in "package.json" file).
+
+        NOTE : we know that when we wants to run our javascript file in "node". then we write this command -> "node <filename>". so this time our file name is "index.js" SO command will be `node index.js`.
+
+        ABB hame baar baar ye command na likhna pde islie hamne ekk script add kri hai ("package.json" file mai) i.e -> `start": "node index.js`
+
+        abb hamm directly ye command likh skte hai -> "npm run start". iss command sai bhi chalega too "node index.js" hee but iss baar hame node wala command likhne ki jrurat nhi pdi
+
+        4. run a command -> 'npm install express' (in our `chaideploy` folder). -> this command will add dependency of express in our 'package.json' file.
+
+        5. copy and paste the "Hello World" ka code (wala code from `Getting Started` section from express.js official site) in our "index.js" file.  ABB jo bhi iss file mai likha hai wo smj mai aa jaaega & iss file mai hamne Notes bhi add krdiye hai
+
+        6. We have run a command `npm install dotenv` and created '.env' (environment variable file in our 'root' folder) file => Read the documentation from "dotenv" website and follow the steps jo usme bataye hai
+
+        Why we use Need this '.env' file and Why we have installed it? -> Its because maanlo hamare iss backend ke code ko koi or user use krr rha hai and hamari file mai jo 'Port Number' hamne likha hai vhi aage gaya hoga abb Problem yeh hai ki jo Port Number hamare backend file mai likha hua hai ussi Port Number par uss user ka koi or kaam chal rha hai too ESEE situation ko handle krne ke liye we use `Environment Variables`. abb JAB bhi hamm hamare project ko Production mai bhejenge (Means Deploy krenge) tab agr jo port hamne bheja hai wo free nhi hua agle user ki machine mai tab fiir hamara wala 'PORT' override ho jaaega and jo bhi user port user ki machine mai free hoga wo port par ye backend chal jaaega
+
+        ABB ye step krne ke baad Hamari Application hogyi hai `Production Ready` (Mtlb ki now we can Deploy it).
+
+        To Deploy -> Pasie lagenge free shyd hee hai abb koi. but fiir bhi agr hamm dekhna chhate hai ki deploy kese hota hai too fiir video mai dekhlena Itna bhi koi rocket science nhi hai
+        Some Hosting Plateforms to deploy our Backend Application : DigitalOcean , Heroku , etc.
+
+        Main iss Video mai jo sabse important tha -> 'Environment Varibles ko smjna' tha baaki sab too bss normal hee tha i.e hamne express ki website sai code copy paste kiya hamari file mai and usme `request and response` smja bss
+        

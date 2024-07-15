@@ -82,6 +82,8 @@ app.listen( port , () => {
 })
 
 
+// Note : ye `index.js` file -> Server hai jo ki hamne banaya hai. Yeh `.get` and `.listen` methods sai milke server bann gaya hai
+
 
 // v.Imp Note: dont forget to put `/`(slash)  in our "GET" request from the server
 
