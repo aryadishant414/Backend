@@ -36,3 +36,58 @@ Steps :
 
         Main iss Video mai jo sabse important tha -> 'Environment Varibles ko smjna' tha baaki sab too bss normal hee tha i.e hamne express ki website sai code copy paste kiya hamari file mai and usme `request and response` smja bss
         
+
+
+************** Video 3 (How to connect frontend and backend in javascript | Fullstack Proxy and CORS) ***********************
+
+* npm install axios -> 'axios' ekk Library hai jo specailly likhi gayi 'Web Request' krne ke liye, Ki data kis tarag sai aa rha hai kya hoga agr data fail hogya too kya hoga data loading ho rha hai tab kya hoga everything.
+ 'axios' bhi fetch jesa hee hai but 'axios` kuch additional features and  functionalities deta hai hame.
+
+ Note : Read 'axios' Documentation from => axios npm website. BOHOT jyada hee powerfull library hai weekly install bhi bohot jydaa hai iske so read jrur krna
+
+
+* C O R S (Cross Origin) Error => CORS protects our Browser by providing a Security Layer.
+                Example : Hamare ghar mai ham harr kisi ko Enter hone nhi dete hai.
+                
+                This error says ki hamara Origin different hai (i.e cross origin).
+                Cross Origin Mtlb => Url ka POrt and Backend (i.e server) ka PORT dono different hai islie yeh error aaya hai.
+
+                How to remove this CORS(Cross Origin) Error ? => Agr hamm chhahte hai ki hame yeh CORS error nhi dikhe `console screen` mai too Hamara `URL and PORT` dono Same ORIGIN PAR hone chahiye. SAME Origin Mtlb ? => Mtlb ki hamara URL(frontend mai jo bhi link ham search krr rhe hai) uska POrt and Hamara Backend (i.e server) ka `Port` dono same hone chahiye.
+
+                To Do So we have Below Solutions....
+        
+        Solutions for Cors Error => 
+                1. install 'cors' npm package and import in our frontend file. (install krne ke liye and iske baare mai jaane ke liye search on google : 'cors npm').
+                
+                2. backend mai 'whitelist' (i.e allow) krdo. Mtlb ki whitelist krte time batado ki mai kis-kisko allow krna chhata hu
+
+                3. Follow a Structure for URL => hamm yeh solution approach use krr rhe hai
+                        isme hamm sabse pehle too frontend ki 'App.jsx' file mai and backend ki 'index.js' file mai. '/api' laga denge
+                        YE `/api` ekk Structure hamm folloe krr rhe hai. See below example
+
+                       Example :
+                        Frontend mai ese likha-> axios.get('/api/jokes')
+                        Backend mai ese likha ->  app.get('/api/jokes' , (req , res) => {
+
+                        Abb yeh likhne ke baad Hamare Pass Error aayi -> 404 Not Found.
+
+                * Error 404 not found => Maanliya frontend and backend dono ekk hee structure follow krr rhe hai but hamane backend ko kese pata ki yeh jo request aa rhi hai yeh muje accept krni hai ya nhi.
+                Too ISKE liye we Have Concept of `P R O X Y`.
+
+                * P R O X Y -> hamm frontend mai `vite.config.js` file mai jaaenge and add a proxy there.
+                                Like this : 
+                                server: {
+                                        proxy: {
+                                        '/api': 'http://localhost:3000',
+                                        },
+                                }, 
+
+                                Abb Yeh krne sai kya hua ki jab bhi ham yeh Structure use krenge backend(server) sai kuch lene ke liye tab hamare frontend ki url request mai `api` mai piche sai yeh "proxy" append ho jaaega. abb backend ke pass jese hee request aayi too backend ne dekha ki yeh bhi same structure follow krr rha hai jo mai follow krr rha hu i.e '/api' wala. and isko backend verify krta hai ki iss request ke api ke andar bhi same PORT aa rha hai jo ki mai use krr rha hu. TOo fiir yeh 404 error ko resolve krdega
+
+                    TO read about Proxy : Search on google -> Proxy react (agr hamm react sai application bana rhe hai toh) 
+                                          Search on google ->  Proxy vite (agr hamm vite sai application bana rhe hai toh)  
+
+
+
+                * Bad Practices that is followed by some companies : 
+                        Log kya krte hai ki frontend folder mai `build` (npm run build) command chala dete hai and iss command sai ekk `dist` name sai folder bann jaata hai jisme saara frontend ka code jo bhi apn ne likha hota hai wo pada hota hai. but ye dist folder "Static Folder" hai kyoki abb jab bhi hamm frontend ke code mai change krenge too iss `dist` folder mai too change hoga nhi agr hamm changes chahte hai too hame iss old dist ko delete krke new `dist` folder banana padega by using `npm run build` command. abb iss `dist` folder ko yeh yaha sai backend ke folder mai move krwa dete hai Then backend mai `Middleware` (read about middlewares on google agar chaho tohh hee nhi too apn baadme pdh lenge aage) add krdete hai ki muje yeh wala static 'dist` folder sai hee frontend chahiye. abb esa krne sai hamne frontend and backend sab ekk hee jagah sai le liya hai and isse hamari cost wagara bhi save hogyi hai ki hame frontend sai kuch bhi lene jana hee nhi hai jese hee hamara server start hoga then ussike saath hee hamara frontend bhi load ho jaaega but NOTE : yeh wala frontend static hai . agr hamne original frontend file mai kuch bhi changes kiye toh hamare server par jo frontend hai usme koi bhi changes nhi honge kyoki hamne too static wali frontend ko load krwaya hai. or Agr hamm chhate hai ki changes bhi load ho too again mai vhi old process repeat krna pdega i.e old `dist` folder ko delete kro then fronten folder mai new dist folder banao then usko vha sai backend ke folder mai move kro..                                          
