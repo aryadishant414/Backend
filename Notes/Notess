@@ -38,7 +38,7 @@ Steps :
         
 
 
-************** Video 3 (How to connect frontend and backend in javascript | Fullstack Proxy and CORS) ***********************
+*************************** Video 3 (How to connect frontend and backend in javascript | Fullstack Proxy and CORS) ****************************
 
 * npm install axios -> 'axios' ekk Library hai jo specailly likhi gayi 'Web Request' krne ke liye, Ki data kis tarag sai aa rha hai kya hoga agr data fail hogya too kya hoga data loading ho rha hai tab kya hoga everything.
  'axios' bhi fetch jesa hee hai but 'axios` kuch additional features and  functionalities deta hai hame.
@@ -91,3 +91,56 @@ Steps :
 
                 * Bad Practices that is followed by some companies : 
                         Log kya krte hai ki frontend folder mai `build` (npm run build) command chala dete hai and iss command sai ekk `dist` name sai folder bann jaata hai jisme saara frontend ka code jo bhi apn ne likha hota hai wo pada hota hai. but ye dist folder "Static Folder" hai kyoki abb jab bhi hamm frontend ke code mai change krenge too iss `dist` folder mai too change hoga nhi agr hamm changes chahte hai too hame iss old dist ko delete krke new `dist` folder banana padega by using `npm run build` command. abb iss `dist` folder ko yeh yaha sai backend ke folder mai move krwa dete hai Then backend mai `Middleware` (read about middlewares on google agar chaho tohh hee nhi too apn baadme pdh lenge aage) add krdete hai ki muje yeh wala static 'dist` folder sai hee frontend chahiye. abb esa krne sai hamne frontend and backend sab ekk hee jagah sai le liya hai and isse hamari cost wagara bhi save hogyi hai ki hame frontend sai kuch bhi lene jana hee nhi hai jese hee hamara server start hoga then ussike saath hee hamara frontend bhi load ho jaaega but NOTE : yeh wala frontend static hai . agr hamne original frontend file mai kuch bhi changes kiye toh hamare server par jo frontend hai usme koi bhi changes nhi honge kyoki hamne too static wali frontend ko load krwaya hai. or Agr hamm chhate hai ki changes bhi load ho too again mai vhi old process repeat krna pdega i.e old `dist` folder ko delete kro then fronten folder mai new dist folder banao then usko vha sai backend ke folder mai move kro..                                          
+
+
+
+************************************ Video 5 (Data modeling for backend with Mongoose) ***********************************************************
+
+* In this video we have learnt About Data Modeling/Object Modeling.
+
+* Mongoose -> Tool used for Data Modeling / Object Modeling
+
+* iss video mai too hamne 'StackBlitz' sai hamare data ki modeling kri hai
+
+* data/object modeling -> ekk structure tyaar krna ki hamare database mai konsa data jaaega and kese jaaega
+
+* Stackblitz => website hai jo bhi environment setup krdeti hai hamare liye chahe kiska bhi ho environment it will set. Mtlb ki hamre system mai chijo ko bina install kiye direct ham unhe use krr skte hai
+
+* To do Data Modeling => 
+                        We Always have to follow 3 Steps :
+
+                        1. import mongoose from 'mongoose'; 
+
+                        2. const subTodoSchema = new mongoose.Schema({} , {timestamps:true});  
+                                // This upper line will create the Schema. here 'Schema' ekk function hai jisme 2 parameters aate hai. 1st parameter is necesaary KO ki ekk Object hota hai jisme ham hamare schema ko define krte hai and 2nd parameter is Optional, which is also an Object but iss object ke andar timestamps aata hai Mtlb ki user ne kis time par create kiya schema kis time par update kiya ye sab
+                       
+                        3. export const SubTodo = mongoose.model('SubTodo', subTodoSchema);
+
+                        NOTE : step 3 ke andar '.model' naam ko jo hai wo ekk method hai jiske andar 2 parameters aate hai : 1st parameter ke andar aata hai ki `Database ke andar hamm iss Schema ka kya Name Dena Chahte hai` and 2nd Parameter is Ye jo bhi schema hamm database mai store krwana chahte hai ye `kiske (kis schema ke) base par store krwana chahte hai.
+
+                        NOTE : step 3 ke andar try krna ki hamare Constant Variable ka naam and '.model' method ke 1st parameter ka naam (i.e name of our schema in database) same ho. Koshish yahi rkhna hamesha.
+
+                        Note : hamm jab bhi reference dete hai kisi bhi schema ka kisi or schema ko tab reference ke andar jo schema ka ham reference name dena chahte hai wo hamesha '.model' method ke 1st parameter ka name hee dena hota hai (i.e name of our schema in database).
+
+                        v.v.v.v.v.v.v Imp Interview NOTE => jab ham '.model' method ke andar hamare 1st parameter(i.e name of our Schema) jaata hai database mai too Database usko store kese krta hai ? => ANS : database Database mai uss Schema ka jo bhi name aaya hai usko `lowercase` mai convert krdega and usko plural banadega Mtlb ki uske saath 's' add krdega.
+
+                                For Example : database mai Schema ka name `Todo` aaya : 
+                                                                                -> then database mai it will converted and saved as 'todos'
+
+                                Ex-2 : database mai Schema ka name 'SubTodo' aaya  -> then database mai it will converted and saved as `subtodos`
+
+                                Ex-3 : 'categories' aaya too -> our database is very intelligent and usko dikh rha hai ki jo Schema ka name mere pass mai aaya hai wo `lowercase` mai hee hai and `plural` bhi hai. too isme database kuch bhi changes nhi krega.                                                  
+
+                        -----> SEE code from `Stackblitz`
+
+
+
+
+******************************** Video 6 (Ecommerce and Hospital management Data modelling) ********************************                       
+
+ * enum => It means ki choices
+        mtlb ki inhee choices mai sai choose krna hai and Mandatory chije hai ye sab chije jo iske andar likhi hue hai. ekk na ekk choice ko too choose krna hee hai.
+        Jo values hoti hai wo ham enum ke andar dete hai. values mtlb ki Example: 'gender' hogya person ka yaa fiir We know ki Plane mai 3 types ki seats hee hoti hai too hamne kis type ki seat chahiye
+        NOTE : `enum` ke anadar fields "Array" ke andar hee dii jaati hai
+
+ See code from "Stackblitz"
