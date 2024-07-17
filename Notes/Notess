@@ -144,3 +144,30 @@ Steps :
         NOTE : `enum` ke anadar fields "Array" ke andar hee dii jaati hai
 
  See code from "Stackblitz"
+
+
+ 
+
+
+
+
+
+ ************************************** Video 7 (How to setup a professional backend project) *****************************************************
+ 
+ Project Setup Steps : 
+                        1. make a separate folder for this project (Hamne Backend folder sai bahar banaya hai Project ka folder ekk dum separte folder) and run a command 'npm init'
+
+                        npm init -> by this command node package manager will initialise a repository i.e it will create a `package.json` file
+
+                        2. in root folder of this project (i.e megaProjectBackend folder mai) create a folder `public` and public folder create one more folder i.e `temp`
+
+                        Now run git status command -> you will notice that git issko track nhi krr rha hai
+                        Reason: git does not track empty folders unke andar files hoti hai too hee git track krta hai
+
+                        To track Empty folder Solution ->  create a file in 'temp' folder i.e `.gitkeep`
+
+                        .gitkeep -> empty file hee hai bss ye git ko batati hai ki jiske andar ye file padi hai uss folder ko bhi track krna hai
+
+                        3. create '.gitignore' file in the root folder of this project
+
+                        Now search for `gitignore` generators on google and choose any webiste and search for 'node'(kyoki hamm nodeJS use krr rhe hai) -> yeh hame nodejS ke liye generate krke de dega ki kya kya hame '.gitignore' file ke andar daalne hai i.e jinhe ignore krna hai. So copy kro uss website sai and paste it in '.gitignore' file
