@@ -159,7 +159,7 @@ Steps :
 
                         npm init -> by this command node package manager will initialise a repository i.e it will create a `package.json` file
 
-                        2. in root folder of this project (i.e megaProjectBackend folder mai) create a folder `public` and public folder create one more folder i.e `temp`
+                        2. in root folder of this project (i.e megaProjectBackend folder mai) create a folder `public` and public folder ke andar create one more folder i.e `temp`
 
                         Now run git status command -> you will notice that git issko track nhi krr rha hai
                         Reason: git does not track empty folders unke andar files hoti hai too hee git track krta hai
@@ -171,3 +171,64 @@ Steps :
                         3. create '.gitignore' file in the root folder of this project
 
                         Now search for `gitignore` generators on google and choose any webiste and search for 'node'(kyoki hamm nodeJS use krr rhe hai) -> yeh hame nodejS ke liye generate krke de dega ki kya kya hame '.gitignore' file ke andar daalne hai i.e jinhe ignore krna hai. So copy kro uss website sai and paste it in '.gitignore' file
+
+                        4. create a `.env` file in root folder of this project
+
+                        5. create 'src' folder in root folder of this project (i.e in backendMegaProject folder)
+
+                        inside 'src' folder -> create 'app.js' 'constants.js' and 'index.js' file  
+
+                        6. go to 'package.json' file -> do some work in this file. i.e 
+                        add these all in this file 
+                        
+                        =>   1. "type":"module" -> Javascript mai chije ko import krwane ke 2 tarike hote `common JS` sai and `module JS` sai . But ham poore project mai 'module Js' wala type use krenge jisse consistency bani rhe.
+
+                                2. install `nodemon` -> jese hee hamari files save hoti hai yeh hamare server ko restart krdeta hai bss
+
+                                Run this command: `npm i -D nodemon`
+                                Abb nodemon install too hogya hai but hamare command ko batana bhi too pdega na ki kab nodemon ko run krna hai jisse server restart ho ske.
+
+                                So for this,
+                                Now add script for this in 'package.json' file -> "dev": "nodemon src/index.js"
+                                 
+                                 ABB jese hee ham "npm run dev" likhenge hamara server restart ho jaaega
+
+                        7. Create some folders in `src` folder :
+
+                                   1. controllers : majorly functionality yaha hogi
+                                   
+                                   2. db : database ko connect kese krna hai. database ka connection logic yaha likha jaata hai most of the times.
+
+                                   3. middlewares  :  jo code hame in between run krwana hai. 
+                                     For Example: hamare pass koi request aayi server usko fulfill kre usse pehle hee mai kuch Checks (conditions) lagana chahta hu ki ye request fullfill hone sai pehle ye chij check kro.
+                                     Too issiko hamm middlewares kehte hai
+
+                                     4. models : data modeling/object modeling jo hame abb ache sai aati hai. Stackblitz par hamne models banaye hai kaafi
+
+                                     5. routes : kaha kese kiss jagah par jaana hai wo sab logic code iske andar aayega
+
+                                     6. utils : utilities ka hee shortcut hai. hamm utils utilities ko hee kehte hai bss util ekk fancy word hai programmers ne diya hai.
+                                        Ham Jab kaam krenge tab hame bohot saari utilities lagegi jese "File Upload" krna ye ekk utility hai Too File Upload hamm user sai uski profile mai bhi krwaege , videos mai bhi krwaege too kyo na iski ekk utility hee banake rkh di jaaye.
+                                        Ex 2 : kaii jagah hamm `Mailing` ka bhi use krenge too kyu na ekk Mail ki bhi Utility banake rkh di jaaye.
+
+                                        TOO In short jo-jo functionality baar baar repeat hogi uski hamm Utility hee bana dete hai.
+                                        Sirf apni suvidha ke liye ye kaam kiya jaata hai.
+                                        Its just a Professional approach
+
+                                Note : Filhaal ye saare folders Empty hai too vpis vhi Problem aagyi hai i.e Git par ye folders track nhi ho rhe hai. 
+                                Too ekk too solution hame pata hai ki hamm harr ekk folder mai '.gitkeep' file bana skte hai. BUT hame pata hai ki Abhi ye folders empty hai but baadme hamm isme wese bhi files add krne hee wale hai so filhaal ye folders track nhi bhi honge tab bhi chalega filhaal locally save hai baadme jab ham inme files wagara create krenge tab track ho jeega yeh too
+
+
+                        8. Prettier  -> install prettier. Its a Code Formatter Extension.
+
+                        Why we use this ? => kyoki hamm team mai bohot log kaam krte hai abb ho skta hai koi code kisi or format mai likh rha hai jese koi tab mai 3 spaces use krr rha hai koi 2 spaces use krr rha hai too end mai jab saara code mix hoga tab code mai bohot inconsistency aa jaaegi islie ham ye `Prettier Extension` install krte hai jisse sabke code ki Formatting samme ho and code readability and consistency bani rhe..
+
+                        But ham ignore krna chahe too krr skte hai but Ham esaa krenge nhi kyoki we are following the Professional Approach
+
+                        So Run this Command : `npm i -D prettier`
+
+                        Abb iske install hone ke baad hame 2-3 files khudse add krni hoti hai 
+
+                                Step 1 : Create a file `.prettierrc` in root folder. Code iss file mai sai dekhlena smj mai aajaega.
+
+                                Step 2 : Create a file `.prettierignore` file in src folder -> Jese `.gitignore` file hoti hai wese hee yeh bhi file hoti hai Ki issme kya kya hai jo ki hame ignore krna hai. Means ki kon-konsi esee files hai jinme muje 'prettier' ko implement nhi krna hai. See Code from this file smj mai easily aajega.          
