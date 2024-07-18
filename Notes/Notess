@@ -231,4 +231,80 @@ Steps :
 
                                 Step 1 : Create a file `.prettierrc` in root folder. Code iss file mai sai dekhlena smj mai aajaega.
 
-                                Step 2 : Create a file `.prettierignore` file in src folder -> Jese `.gitignore` file hoti hai wese hee yeh bhi file hoti hai Ki issme kya kya hai jo ki hame ignore krna hai. Means ki kon-konsi esee files hai jinme muje 'prettier' ko implement nhi krna hai. See Code from this file smj mai easily aajega.          
+                                Step 2 : Create a file `.prettierignore` file in src folder -> Jese `.gitignore` file hoti hai wese hee yeh bhi file hoti hai Ki issme kya kya hai jo ki hame ignore krna hai. Means ki kon-konsi esee files hai jinme muje 'prettier' ko implement nhi krna hai. See Code from this file smj mai easily aajega. 
+
+
+
+
+
+
+
+********************************************** Video 8 (How to connect database in MERN with debugging) *******************************************
+<!-- Steps -->
+        
+        1. create a account and login on `MongoDb Atlas`
+         `MongoDb Atlas` -> MongoDB Atlas is a managed cloud database service. `Online MongoDb database` provide krwata hai yeh.
+
+         create the user and database and set your account Video mai dekhlena easy hee hai baar baar next next hee krna hai bss
+
+        2. Setup Environment Variables (`.env file` mai set krne hai)
+
+        3. setup Constants in 'constants.js` file
+
+        4. install these packages : `dotenv` , `mongoose` , `express` in `root` folder of our project
+
+
+v.Imp Note : Jab bhi ham Database sai baat krne ki koshish krenge tab Problem/Errors too aa skti hai SO ALWAYS FOLLOW THESE APPROACHES : 
+                1.  `TRY Catch` mai wrap krdo Yaa Fiir `Promises` le skte hai (kyoki promises mai bhi erros handle ho jaati hai 'Resolve and Reject' sai)  SO Dono mai sai ekk na ekk too lena hee pdega
+
+                2. "Database is always in Another Continent". Kehne ka mtlb ye hai ki Database sai jab bhi baat krenge too time lgta hai too hame `Async Await` lagana hee pdega. This is always a better approach
+
+Imp NOTE : Database Connection 2 Major tarike sai establish ho skta hai :
+        1. saara code 'index.js' file mai likhdo and application execute hote hee wo saara code run krwado
+        
+        2. ekk separate 'db' naam ka folder banau jisme database ka saara code likha hua hai and usko 'index.js' file mai import krwake use krlu.
+
+          2nd option is more good But hamm dono hee methods dekhenge
+
+                Method/Approach 1 : 
+                        isme hamm `IIFE` ka use krr rhe hai (But chahe too normal function ko bhi use krr skte hai usko define krwake fiir usko call krwa skte hai).
+                        IFFE -> Javascript mai hamne padhe hai. `Immediately Invoked Function Expressions (IIFE)` are JavaScript functions that are executed immediately after they are defined.
+
+                        So 'index.js' file mai hamne 'IIFE' function ko define krdiya hai. `IIFE` ka SYNTAX GOOGLE PAR DEKHLENA
+                        And code iss file ka iss file sai dekhlena
+
+                        in `index.js` file : 
+                                        * we have created express 'app' using express so iske liye express ko import bhi krwaya tha.
+                                        
+                                        * app.on -> "Custom Event Listener" hai.
+                                        isme `"errorrr"` ekk custom Listener hai... Isko (app.on custom event listener) ko use krne ka mtlb hai ki express ki app mai hamne ekk custom event listener lagaya hai kyoki ho skta hai hamara database ka connection too successfully bann gaya ho 'mongoose.connect' sai BUT ho skta hai express ki jo app hai wo database sai baat nhi krr paa rhi ho shyd usme kuch error ho skta hai islie Hamne 'app.on' ka use kiya 
+
+                        NOTE : 'index.js' file mai jo commented code hai jisme hamne Database connection banaya hai wo ekk dumm badhiya hai hamne achhi practice bhi follow kri hai i.e hamne usko ekk 'IFFE' function ke andar bhi likha hai , hamne 'try-catch' block ka bhi use kiya hai , `async-await` ka bhi use kiya hai BUT Hamne Hamari 'index.js' file ko bohot jyada polluted krdiya hai bohot bohot jyda mix jese hogya hai.
+                                ISLIYE isko comment kiya hai and abb dusri Approach/Method follow krenge hamm 
+
+
+                Method/Approach 2 : 
+                        STEPS : 
+                                1. 'db' folder ke andar create the `MongoDb Atlas` (Database) connection and export it from there.
+                                2. read this line -> `As early as possible in your application, import and configure dotenv:`(From '.env npm' on google).
+
+                                Too Accor. to this line we know ki sabse pehle too hamm yahi ('index.js' of root folder) waali file ko hee run karwanaa chahte hai too isme '.env' variables ko import krwado and do one change in `package.json` file also.
+
+                                Add this in 'dev' script : ` -r dotenv/config --experimental-json-modules `
+
+
+
+
+
+
+
+
+
+
+
+
+        Note : 
+        
+                * 'app.js' -> yeh hogi `Express` ke through
+
+                * 'mongoose' -> `database connection` hoga mongoose ke through       
