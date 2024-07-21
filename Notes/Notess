@@ -296,6 +296,177 @@ Imp NOTE : Database Connection 2 Major tarike sai establish ho skta hai :
 
 
 
+**
+************************************************************** Video 9 (Custom api response and error handling) *********************************************************************
+
+In this video what we have done :      
+
+        1. Created express ki app in `app.js` file. sirf app create krke export krwayi hai iss file mai
+
+        2. In `index.js` file of Root folder of our project. issme hamne `.then and , catch` waali conditions likhi hai (`connectDB` method ke andar). Code dekhlena smj mai aajega.
+
+        3. install these packages : `cookie-parser , cors` by using this npm command -> `npm i cookie-parser cors`
+
+                cors : it allows us to do settings in our cross origin resource sharing
+
+                app.use : used when we have to do 'middleware settings' yaa fiir `configuration settings`
+
+                cookie-parser : Iska kaam bss itna hee hai ki jo mere user ka `browser` hai na mai (mtlb hamara server) uske andar jaake 'C R U D' operations karwa paau. Menas ki user ke browser ki 'cookies' accept krwa paau and 'set' kar paau. TOO uski cookies par mai Crud Operations perform kar paau
+
+        4. use 'cors' in our app. Note : app (express ki) banne ke baad hee hamm 'cors' ka use krr skte hai. SEE CODE from `app.js`
+        FOR MORE DETAILS READ THE `CORS` DOCUMENTATION
+
+        5.  creating file in 'utils' folder -> kyoki hame pata hai hame bohot baar jrurat pdegi hamare database sai connect krwane ki too ye too fix hai Erros too aa hee skti hai SO TO HANDLE THOSE "error ,req,res,next" ki ERRROS hamm ekk 'wrapper' bana dete hai i.e utility folder ke andar ekk file bana dete hai uske andar hmane kuch logic code likha hua hai bss jab bhi hamare pass koi bhi error wagara aaye tab hamm iss wrapper ke anadr hamara jo bhi function/method hamm likh rhe hai wo pass krdenge and ye ekk wrapper banake de dega
+        See Code from `asyncHandler.js` file in 'utils' folder.
+        ISS FILE MAI Hamne 2 Methods(dono mai sai kisi bhi method sai kar skte hai ham) discuss kre hai ye DONO hee Use Hote hai Companies mai ITS a PROFESSIONAL APPROACH. isme hamne 'Higher Order Function' ka use kiy hai
+
+        6. Api ke Errors ko handle krna sikh rhe hai. -> FOR THIS go and search on GOOGLE : `node js api error` yeh website hame bohot saari classes degi different differnt errors ki.
+
+                So LEts Hande API ERRORS : Create a `ApiError.js` file in "utils" folder to handle errors.
+                and LEts Handle API Response : Create a 'ApiResponse.js' file in "utils" folder to handle responses . 
+
+
+
+
+
+*************************************************** Video 10 (User and video model with hooks and JWT) ********************************************
+        In this video we have done :
+                        
+                        1. created 'user' and 'video' model in 'user.model.js' & 'video.model.js' files (in models folder).
+                        2.
+
+                        2. run this command in root folder of our project -> `npm install mongoose-aggregate-paginate-v2` and import it in our 'video model'
+
+
+                          * "use" it ('mongoose-aggregate-paginate-v2') before export .
+                          For this go to middleware in mongoosea and read the docs of middlewares in mongoose.
+                          "videoSchema.plugin(mongooseAggregatePaginate)"
+
+                          `plugin` : mongoose hame allow krta hai khudke plugins ko add krne ka
+
+                          Aggregation Pipelines in Mongoose : Mongoose hame Allow krta hai Aggrgate Queries likhne ke liye. ye queries normal queries sai alag hoti hai AND YAHI CHIJ KI VAJAH SAI HAMARA PROJECT NEXT LEVEL PAR JAAEGA.
+                               
+
+                        3. got to npm js on google search and read about : 'bcrypt' and `json-web-tokens`.
+                        and install it in out root folder of our project.
+
+                        `bcrypt` : normal plain text password ko encrypt krdeta hai.
+
+                        `json web tokens` : create unique tokens. YEH TOKEN ekk chaabi kii tarah hai  jab tak ham isko nhi khoenge tab tak yeh safe hai but jab hamne apni chhabi ko kho diya tab jisko bhi yeh chhabi mili tab wo kuch bhi krr skta hai
+                        To create jwt(json web tokens) go to `jwt.io` 
+
+                        now import krdo inn dono ko 'user model' mai
+
+                        4. abb hamara data direct too encrypt hota nhi hai hame data ko encrypt krwane ke liye koi method chahiye. SO go to middleware in mongoose and read about 'pre' hook.
+
+                        `pre` hook in middleware : Jab bhi ham koi data Mongo Db par save krwane ja rhe hai usse pehle ye 'pre' hook lagado and usme jo bhi ham krwana chahte hai wo condition lagado. JEse hamare iss case mai hamm hamare password jo ki plain normal text mai bhej rhe hai ham mongodb par usse ham encrypt krwana chahte hai. too bss jab hamm iss password ko submit (i.e store) karwa rhe hai mongoDb(i.e our database) par usse pehle 'pre' hook mai iss passeord ko encrypt karwane ka logic likhdo.
+                        SO ISS TARAH sai hamare password wali problem solve ho jaaegi and password encrypted form mai hee jaaega MongoDb (i.e hamare database par )
+
+                        'pre' hook method hee hota hai i.e ekk function hee hota hai and iske parameter mai ekk event aata hai ki kis event par hamm ye hook lagana chhate hai and and ekk call-back aata hai. FOR THIS READ ABOUT THE EVENTS IN MIDDLEWARE
+                        NOTE: iske (pre hook) ke second paramter mai kabhi bhi normal callback ke jese mat likhna kyoki WE Know ki 'arrow function' ke andar `this` is not supported this ka reference nhi hota hai. ISLIYE use normal function
+
+                        `next` : hame pata hai middleware hai too uske next wale ka access bhi hoga hee middleware ke pass. kii agr ye condition check hogyi hai too iss condition check kaa jo bhi response aaya hai usse next wale ke pass bhejdo. agr saare next check hogye hai and last mai next par bheja or next MongoDb (our database) hee tha too fiir next terminate ho jaaega and fiir database mai ham chale jaaenge jo bhi next ne return kiya hai uske according
+
+                        Do this work in 'user.model.js' file kyoki iss data model mai hee too hamne password ko define kiya hua h
+
+
+                        4. Mongoose hame kuch custom methods design krne ka allow krta hai. Hamare case mai hamm mongoose mai hamare custom methods ko isliye bana rhe hai kyoki hamm hamne jo password encrypted bheja hai MongoDb mai abb jab koi user
+
+                        5. `jwt` -> its a bearer token. MTLb ki ekk chaabi ki tarah hai. jiske pass iski chhaabi hogi database kehta hai mai usko data bhej duga. ITS a very Strong Security.
+
+                        6. Write 'ACCESS and REFRESH TOKENS' in  ".env" file.
+
+                        NOTE : 'ACCESS' tokens Database (MongoDb) mai store nhi hoga. Only 'REFRESH' tokens hee honge
+                        ESE HEE YE WORK KRTA HAI
+
+
+*************************************************** Video 11 (How to upload file in backend | Multer) ********************************************
+        In this video we have done :            
+
+                        1. install 'cloudinary' and 'multer'.
+
+                                'cloudinary' -> ekk SDK(software develpoment kit) hai. ispe hamari files upload kete hai ham like: photos , videos , pdf's etc . ye behind the scenes 'AWS' hee use krta hai.
+
+                                NOTE : Always use this best Approach in Production : jab bhi user sai hamm data le rhe hai pehle usko uske local server par store karwana hai and 2nd step mai usko cloudinary par upload krwnaa hai. hamm ye local storage par save krwane wale process ko bypass bhi krr skte hai but ITS a good practice.
+                                WHY GOOD PRACTICE : kyoki ho skta hai cloudinary sai data nhi aa paa rha ho koi bhi 'xyz' issues ki vajah sai too agr hamare local mai wo data store pada hoga too direct data vha sai aa jaaega.
+
+                                `multer` -> cloudinary ko use krne ke liye iski need pdti hai. Without multer we can't upload anything on       cloudinary.
+                                 "multers" middlewares hee hote hai. "multers" ki help sai hee too ham hamari file jo ki "database" par save hone wali hoti hai usko pehle ham hamare 'local server' par store karwate hai.
+                                IN SHORT : `Multer is indeed a middleware for handling file uploads in Express.js.`. middlewares ka use too hoga hee hoga hamari harr ekk application mai. YAHA ISS CASE MAI BHI USE HUA HAI 'multer' middleware ka jo ki bata rha hai ki jab bhi hamara user data submit krega tab uska kya karna hai. iss case mai multer ne bataya hai ki jese hee user apna data submit kre tab usko pehle too hamari local storage mai save krwao and then usko 'cloudinary' par upload krwao...
+                                CHATGPT PAR SEARCH KRDENA VHA BEST EXPLANATION MILL JAAEGA. HInt  : like i am a 5th class child. hahahahahahahaha
+
+                        2. create a utility for cloudinary.
+                        i.e CREATE A FILE FOR CLOUDINARY (named : 'cloudinary.js') in "utils" folder
+
+                        ITs totally our choice ki hamm cloudinary ki file jo hamm baar baar use krna chahte hai usko utils folder ke andar banaye yaa fiir services ke andar bananye. SO hamne utils folder ke andar banai hai
+
+                        3. create 'middlewares' by using "multer".
+
+                        `middleware` : Jaane sai pehle mujse milke jaana. mtlb ki wo kaam krne sai pehle ekk baar mere paas aana   
+
+                        So lets create 'multer.middlewares.js' file in `middlewares` folder   
+
+
+                        NOTE : By using `multer.memoryStorage()` -> you avoid saving files to your local disk and directly upload them to Cloudinary. 
+
+                              & By using `multer.diskStorage()` -> we upload the uploaded files on our local disk storage. kyoki ho skta hai videos upload ho rhi ho or unki size bohot badi hp jo ki multer ki memory ki size sai badi ho TOO uss case mai hame hamara local storage use krna chahiyee islie hamm iss 'diskStorage' wale method ka use krr rhe hai.
+
+                              SO IN SHORT : 
+                                             Disk Storage : hamari local storage ki baat ho rhi hai
+                                             Memory Storage : 'multer' ki memory ki baat ho rhi hai
+
+
+
+
+
+
+
+*************************************************** Video 12 (HTTP Crash Course | https methods) ********************************************
+        In this video we have done : just knowledge purpose ke liye tha video ki ye sab chijo ka knowledge hona chhaiye like "HTTP Methods" , "HTTP Statuc Codes".
+
+        * HTTP Methos : GET , POST , HEAD , etc. 
+        See the image uploaded in 'backend' folder with "HTTP Methods and HTTP Status Codes"
+
+
+
+
+
+
+*************************************** Video 13 (Complete guide for router and controller with debugging) ****************************************
+
+
+In this video we have done :
+
+        Steps
+                1. created 'user' controller in 'user.controller.js' file
+                2. created router for user in 'user.router.js' file 
+                3. import our router in 'app.js' file.
+
+                NOTE : sabse pehle 'app.js' mai jahapar bhi hamara router(iss video mai hamne 'user router banaya' hai) import hua hai vaha router ki declaration hogi fiir vha sai hamne main router mtlb jiss bhi router par hame jana hai (iss video mai hamne "userRouter" banaya hai too hamm user Router par jaaenge ) uska method call krwa denge.
+                Abb uss particular router mai router ka method call krwaya hai (iss video mai 'userRouter' par gaye hai ham) abb iss router sai hamne method bataya hai ki konse method ko call krwana hai too ham chale gaye uss particular method par abb. (Filhaal hamne iss video mai 'registerUser' wala dekha tha too uspe chale gaye Basically ye 'registerUser' ekk controller hee too hai jisme saara logic code likha hoga user ko register krne ka)
+
+                4. Now run our script : `npm run dev`
+                Agr kuch error wagara aati hai too debug krlena
+
+                5. Abb AGR hame dekhna hai ki `registerUser` kya RESPONSE de rha hai TOo iske LIYE we will use "POSTMAN"
+
+                "POSTMAN" -> sabhi industries mai yahi use krte hai so we will use use this postman
+
+
+                TOO BSS ITNA HEE THA ISS VIDEO MAI 
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -307,4 +478,10 @@ Imp NOTE : Database Connection 2 Major tarike sai establish ho skta hai :
         
                 * 'app.js' -> yeh hogi `Express` ke through
 
-                * 'mongoose' -> `database connection` hoga mongoose ke through       
+                * 'mongoose' -> `database connection` hoga mongoose ke through 
+
+                *middlewares -> hamari URl request jab hoti hai tab server uss request ko fulfil kre usse pehle uske bich mai hamm kuch checks laga dete hai ki pehle ye conditions check kro AGR ye fulfill hoti hai too aage server respond krega.
+
+                * `async` -> iske anadar parameters aate hai : (error , req , res , next);     
+
+                here 'next' : is our middleware
