@@ -311,14 +311,26 @@ In this video what we have done :
 
                 app.use : used when we have to do 'middleware settings' yaa fiir `configuration settings`
 
-                cookie-parser : Iska kaam bss itna hee hai ki jo mere user ka `browser` hai na mai (mtlb hamara server) uske andar jaake 'C R U D' operations karwa paau. Menas ki user ke browser ki 'cookies' accept krwa paau and 'set' kar paau. TOO uski cookies par mai Crud Operations perform kar paau
+                cookie-parser : Iska kaam bss itna hee hai ki jo mere user ka `browser` hai na mai (mtlb hamara server) uske andar jaake 'C R U D' operations karwa paau. Menas ki user ke browser ki 'cookies' accept kra paau and 'set' kar paau. TOO uski cookies par mai Crud Operations perform kar paau
 
         4. use 'cors' in our app. Note : app (express ki) banne ke baad hee hamm 'cors' ka use krr skte hai. SEE CODE from `app.js`
         FOR MORE DETAILS READ THE `CORS` DOCUMENTATION
 
-        5.  creating file in 'utils' folder -> kyoki hame pata hai hame bohot baar jrurat pdegi hamare database sai connect krwane ki too ye too fix hai Erros too aa hee skti hai SO TO HANDLE THOSE "error ,req,res,next" ki ERRROS hamm ekk 'wrapper' bana dete hai i.e utility folder ke andar ekk file bana dete hai uske andar hmane kuch logic code likha hua hai bss jab bhi hamare pass koi bhi error wagara aaye tab hamm iss wrapper ke anadr hamara jo bhi function/method hamm likh rhe hai wo pass krdenge and ye ekk wrapper banake de dega
-        See Code from `asyncHandler.js` file in 'utils' folder.
-        ISS FILE MAI Hamne 2 Methods(dono mai sai kisi bhi method sai kar skte hai ham) discuss kre hai ye DONO hee Use Hote hai Companies mai ITS a PROFESSIONAL APPROACH. isme hamne 'Higher Order Function' ka use kiy hai
+        5.  creating file in 'utils' folder -> 
+                
+                By CREATING OUR `asyncHandler` Higher Order function :
+
+                * No Repetition: You don’t have to write try-catch blocks in every route handler.
+
+                * Cleaner Code: Your route handlers are simpler and easier to read.
+
+                * Consistent Error Handling: All errors are handled in one place, making your code more robust.
+                
+                * In summary, asyncHandler makes your asynchronous route handlers simpler by automatically handling errors and passing them to Express’s error-handling middleware.
+
+
+                ye(`asyncHandler`) ekk wrapper banake de dega See Code from `asyncHandler.js` file in 'utils' folder.
+                  ISS FILE MAI Hamne 2 Methods(dono mai sai kisi bhi method sai kar skte hai ham) discuss kre hai ye DONO hee Use Hote hai Companies mai ITS a PROFESSIONAL APPROACH. isme hamne 'Higher Order Function' ka use kiy hai
 
         6. Api ke Errors ko handle krna sikh rhe hai. -> FOR THIS go and search on GOOGLE : `node js api error` yeh website hame bohot saari classes degi different differnt errors ki.
 
@@ -464,11 +476,74 @@ In this video we have done :
 
 
 
+******************************* Video 14(Logic building | Register controller) ************************
+
+Things we have done in this video : 
+                Steps : 
+
+                        1. go to 'user.routes.js' file and write the middleware for handling files. Mtlb ki jab ham hamare form ko ya fiir data ko 'db' mai submit krenge tab images ya avatar upload ese hee nhi honge mtlb ki unhe handle krna pdega ki jab ki ye form/data submit kre user usse pehle ekk middleware(jaane sai pehle mujse milke jaana) lagadenge jisse hamari files bhi handle ho jaae(like upload images wagara). 
+                        abb iske baad ham `user.controller.js` file mai ja skte hai and apna register user wala logic code likh skte hai  
+
+
+                  NOW Solve the bugs by Debugging your code
 
 
 
 
 
+
+
+********************************************** Video 15 (How to use postman for backend) ***************************************************
+        Things that we have done in this video : 
+                                                
+                                                1. Pichle video(video 14) ke code ki debugging kri hai
+                                                2. main Important part of this video is 'Postman' ko ache sai configure krna sikha hai. Mtlb 'url' mai jo repeat ho rha tha usko ekk jagah par save krwa diya hai. ISKO MAI YAHA NOTES MAI NHI LIKH PAAUGA agr vps smjna hai too 
+                                                just go and watch this video
+                                                        AT TIME-STAMP : 25:25 (THIS IS VERY IMPORTANT BECAUSE PROFESSIONALLY ISSI TARAH SAI SET/CONFIGURE HOTA HAI 'POSTMAN')
+
+
+
+
+
+
+
+
+
+
+
+
+
+************************************* Video 16 (Access Refresh Token, Middleware and cookies in Backend) ****************************************
+
+Things we have done in this video :
+                Steps : 
+                        1. Writing our 'loginUser' logic code in 'user.controller.js'
+                        
+                        ISS FILE mai we are creating 'Access and Refresh Tokens'
+
+                        NOTE : 
+                        * 'Refresh Tokens' -> database mai save krwate hai
+                        * 'Access Tokens' -> database mai save nhi krwate hai
+
+                        2. logoutUser -> hamm  user ko logout kab karr paaenge? -> JAB ham :
+                                        1. Uss user ki Saari cookies ko clear krenge kyoki ye saari cookies server sai hee manage ho skti hai kyoki frontend mai too ham sirf unn cookies ko dekh skta hai ye hamne 'options' VARIABLE ke andar already bata diya hai
+
+                                        2. hamare model(mongoose schema ke data model mai) mai sai 'refreshToken' ko empty krenge
+                                        TABB JAAKE HAMARA USER ACHE SAI LOGOUT HOGA
+
+                                        BSS YE 2 hee kaam krne hai to logout a user
+
+                                NOW WE HAVE A PROBLEM : jab hame user ko login krwana hota tha tab too ham user ko find krdete the uski email ya username sai but yaha logout krwane ke liye too hamare pass kuch bhi information nhi hai too fiir logout kese krwaenge? TOO ISS PROBLEM KA SOLUTION HAI -> `Middleware`(jaane sai pehle milke jaana).
+
+                                So lets create -> 'auth.middleware.js' -> ye middleware sirf VERIFY karega ki user hai ya nhi hai
+
+AFTER WRITING OUR Middleware : 
+STEPS : 
+        1. Now lets go to routes. ASLI kaam abhi routes ke andar hoga. in 'user.routes.js' file
+
+        2. `verifyJWT` middleware add krdiya hai hamne "logout" route ke andar (in 'user.routes.js' file ke andar) 
+
+        NOTE : hamm chahe jitne middlewares add krr skte hai
 
 
 
