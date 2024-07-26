@@ -546,6 +546,184 @@ STEPS :
         NOTE : hamm chahe jitne middlewares add krr skte hai
 
 
+        -----> NOW START OUR APP KA SERVER AND GO TO POSTMAN AND VHA SAI FRONTEND KE BEHALF PAR ROUTES CALL KRWAO KESE register,login, logout.
+                        If any error comes then Debug it.
+
+
+
+
+
+
+
+
+
+
+
+
+
+*********************************************************** Video-17 (Access token and refresh token in Backend) ********************************************************
+In this Video we have done:
+                Steps :
+                        1. writing 'endpoint' for generating Access Token Again.
+                        endpoint: just a fancy name. In short ham access token ko fiirse generate krr rhe hai (in "user.controller.js" file)
+
+                        NOTE : 
+                                Agr user browser computer par kaam karr rha hai too usko response mai uske cookies browser mai send krega and THEY Will be Accessible by Using : 
+
+                                -> `req.cookies.refreshToken`
+
+                                Agr User mobile par kaam krr rha hai too  usko response mai cookies body ke andar milegi and THEY Will Be Accessible by Using : 
+
+                                -> `req.body.refreshToken` 
+
+                        2. Verify that the token that we have request from the cookies. COOKIES ke andar data encryoted form mai hota hai too iss Verify wale step sai ham sirf iss token ko decode krr rhe hai
+
+                        -> Decode by using 'jwt' SEE code from 'user.controller.js' file in "refreshAccessToken" method
+
+                        3. After Decoding our token too hame saari information mill gyi hogi iss token ke andar. 
+                        SO Now lets make a Database Request lets make a Request. iSS REQUEST MAI BSS HAMM ISS DECODED TOKEN ki `id` maangenge Databse sai. ki jo user ne request bheji hai kya database mai esa koi data (payload) available bhi hai ya nhi.
+
+
+                        NOTE : isme 
+                        
+                        * 'incomingRefreshToken' -> encoded form mai hai jo ki hamne cookies sai liya hai
+                        
+                        * `user?.refreshToken` -> yeh bhi encoded hai kyoki Database mai bhi hamne sab Refresh token ko encoded form mai hee store krwaya hai
+
+                        4. Now check user ka encoded 'refresh' token with database ka 'refresh' token jo ki encoded hee hai
+
+                        5. Now generate new Access and Refresh Tokens. 
+                        hamne access tokens and refresh tokens dono ko generate krne ka ekk hee method bana rkha hai too access token too hamne generate krna hee hai saath hee saath issi method sai refresh token bhi generate ho rha hai too hamne isse koi problem nhi hai naya refresh token bhi generate ho rha hai too bhi chalega. MAin kaam tha access token generate krna jo ki generate ho rha hai
+
+                        NOTE : Hame pata hai hamm new 'access and refresh' tokens generate krr rhe hai too hame iske liye cookies mai bhejna hai jese isse pehle bheja tha too iske liye hamm vps sai 'safe cookies' ke liye `options` bana rhe hai.
+                        uske baad ham `response bhej denge` HAM options ko baar baar use krr rhe hai too iska bhi hamm ekk alg sai method bana skte the
+
+                        CHAHO TOO OPTIONS BANANE SAI PEHLE GENERATE krlo access and refresh tokens and chaho too isske baad krlo. ITS Alright
+
+                        6. Go to 'user.routes.js' and isme `refreshAccessToken` ka route likho and issi route ko hamm hamara 'endpoint' bol rhe hai refresh token kaf
+
+                         
+
+
+
+
+
+
+************************** Video-18 (Writing update controllers for user | Backend with JS) *******************************************
+
+THings we have done in this video:
+        Steps : 
+                1. Write the Subsscription Model in `subscription.models.js` file (in "models" folder)
+
+                2. now go to `user.controller.js` and write these controllers(methods hee hai controllers bhi so dont get confused): 
+                 `changeCurrentUserPassword`,`getCurrentUser`, `updateAccountDetails`.
+
+                 3. now write controllers for Updating the files :
+                        "updateUserAvatar",
+                        "updateUserCoverImage" (iska and `updateUserAvatar` ka code same to same hai)
+
+
+
+
+
+                                                Yaha Sai Aggregation Pipeline Started
+************************************************* Video-19 (Understand the subscription Schema) **************************************************
+THIS VIDEO IS VERY IMPORTANT AS ITS A BASE FOR UNDERSTANDING MONGODB AGGREGATION PIPELINES
+Things we have done in this video: 
+
+        ISME HAMNE dekha ki Subscription data model work kese krr rha hai.
+
+        -> Hamare Subscription model mai hamne 2 objects bana rkhe hai. ekk Subscriber ka and ekk Channel ka.
+        We know that jo user kisi channel ko subscribe krr rha hai wo channel bhi at the end hai too ekk user hee ekk user ka hee too channel hai wo bss hamm usko naam channel de rhe hai. TOO IN SHORT hamara `channel and subscriber` hai dono hee users hee.'
+
+        -> Working of our subscription model : jab bhi koi user kisi channel ko subscribe krega tab internally MongoDb ekk document banaega. har ekk individual user jab bhi subscribe krega tab document banega.
+        Iss document ke andar hoga ekk too uss channel ka naam jisko user ne subscribe kiya hai and ekk uss subscriber(user) ka naam jisne channel ko subscribe kiya hai.
+
+        -> To count how much subscribers a particular channel have: abb hame paata hai har particular user ne jisne bhi kisi channel ko subscribe kiya hoga uska ekk document bana hoga. abb uss document mai sai total subscribers kese nikale jisne target channel ko subscribe kiya hai?: To do so Jitne bhi total documents create hue hai unn sambmese hame uss channel ko find krna hai ki ye targeted channel kis kis document mai present hai. jiss jiss documents mai ye channel present hoga unn sabhi documents ko ham count krdenge isse HAME total Subscribers Mill jaaenge uss particular targeted channel ke.
+
+        -> To count how much channels a particular user have Subscribed? : Upper wala same process bss iss baar hame documents ke andar uss user ko find krna hai ( jiska hamm dekhna chahte hai ki isne kin-kin channels ko subscribe kiya hai) ki yeh user kis-kis document mai present hai fiir count krdenge unn sabhi documents ko isse hame mill jaaega KI Iss user ne kitne channels ko Subscribe kiya hai
+
+
+
+
+
+*********************************************** Video-20(Learn Mongodb aggregation pipelines) **************************************************
+ Things we have done in this video:
+        
+        ISS Video mai hamne jo pipelines sikhi hai wo SDE-2, SDE-3 , Startup level ya fiir Higher Levels ki sikhi hai. SO We have learnt so much advance Aggregation-pipelines. Easy hee thi muje too hard nhi lagi BSS Concentration sai dekhna hota hai video ko.
+        ITS a very Professional Approachn and very easy
+
+        -> To Count Subscribers : 'Channel' ko target krke count honge. ki konse channel ke Subscribers nikalna chahte hai ham
+
+        -> To Count which-which Channels i have Subscribed to : `Subscriber`(user) ko target krke count honge. ki iss particular user ne kis-kis channel ko subscribe kiya hai
+
+
+        -> MongoDb Operators That we have used in this Subscription model ke logic code mai (in `getUserChannelProfile` wale method mai in "user.controller.js" file):
+
+                * "$match" -> iske baare mai code mai hee explain krdiya hai.
+
+                * "$lookup" -> used to join 'data models' . basicaly link krwane ke liye kaam aata hai.
+                        It returns an 'Array of Objects' by default.
+
+                * "addFields" -> used to `add new fields` in our targeted 'user'. EXAMPLE : chaiaurcode channel is our targeted channel jiske hamm subscribers wagara dekh rhe hai youtube par. MTLb uss targeted user ke andar jo information pehle sai padi thi wo too cho hee hoti usime or kuch fields add krdo. RETURN kya krta hai ye hamne code mai hee comment krke bata diya haii.
+
+                * "project" -> Iska use isliye krte hai kyoki Iski help sai ham sirf wo hee values send krte hai targeted user ki. Ham sirf vhi values return krenge jo hamm chahte hai. EXAMPLE : jab bhi hamm youtube par kisike channel par visit krte hai tab vha hame limited information dikhti hai jese ki user ke kitne subscribers hai, uska cover photo, video thumbnail, etc. TOO WO SAB kaam ham iss '$project' Operator (of MongoDb) ka use krke hee krte hai. ISke anadar jin-jin fields ka flag hamne on(i.e 1) krdiya hai sirf vhi fields return hogi in frontend to the requested user.
+
+                Sab kaam ho jaane ke baad ham ekk response bhej rhe hai jiska use hamara 'frontend developer' krta hai jese uski needs hoti hai uss according
+
+
+
+
+        Lookup Ka poora Concept : 
+
+                -> `from` -> lookup ke andar jo "from" hota hai uska mtlb hota hai ki kaha pe jaake lookup krna hai yaani kaha jaake dekhna hai. kaha jaake haamre 'match' field wale jo usse join krwana hai. And kaha se ja rhe hai ham ? mtlb lookup krr rhe hai wo too thik hai par kahase lookup krr rhe hai? hamari present location konsi hai? Too hamm Present mai vhha khade hai jisko hamne 'match' krwaya hai match operator (MongoDb ka Operator hai) ke through. Too yaha sai hamm lookup krr rhe hai jo `match` field ke andar likha hai
+
+                -> `local-field` -> local-field ka mtlb hota hai ki ham jaha present khade hai vha Local name kya hoga iss Lookup waali field ka. Ham present mai kaha khade hai? Ans is 'match' field ke andar jo likha hai ham vha khade hai present mai
+
+                -> `foreign-field` -> foreign-field mtlb hota hai ki ham jaha jaake loopkup krr rhe hai uss data model mai usska kya name hai. or hamm jaa kaha rhe hai? -> Ans : 'from' field ke andar jo likha hai vha ja rhe hai ham lookup krne
+
+
+                -> 'as' -> iss lookup ko jisme bhi ham return krr rhe hai ('match' wali field mai jo likha hai vha ye return hota hai) uska name kya hoga. 'match' wali field mai ye apni ekk 'field' create krta hai. 
+                So in short Lookup ke andar jo kuch bhi likha hai wo jab return hoga tab wo sidha 'match' wali field ke andar jo likha hai wo too rhega hee rahega uske saath hee saath wo uske andar jaake as it is Chipak Jaaega
+
+
+                NOTE : Agr lookup ke hee andar further ekk sub-pipeline hai and abb uske andar further ekk lookup hai too abb obvious hai ki ham SABSE pehle too 'match' field ke andar jo likha tha uspe khade the fiir jab pehla lookup lagaya tab uss lookup mai jo 'from' likha tha ham uske andar pahuch gaye and abb jiske andar ham currently pahuche hai 'from' ke throught agr ussi lookup ke andar ekk sub-pipeline add krdi hai and usme lookup likha hai too abb HAMM CURRENT jaha khade hai wo main pipeline jo ki iss sub-pipeline ke uppr waali pipeline ka lookup likha tha uske andar khade hai. 
+                
+                SUPPOSE IN OUR EXAMPLE jaha HAMNE SUB-Pipeline use ki hai Uss CASE mai sabse pehle jo ham 'user' par khade the fiir pehla lookup aaya too hamari current location thi 'user' the hamm user ki watch history get krne ke liye 'videos' mai chale gaye then ussi lookup ke andar ekk sub-pipeline add krdi jisme hamne ekk lookup likha hai too abb hamari current location hai 'videos' kyoki hamm 'user' ke baad sidha videos ke andar hee gaye the lookup ke through. AGR THORA CONFUSING LAGE TOO VIDEO VPS SAI DEKHLENA 
+
+
+WE can Write Unlimited Pipelines (right now here talking about aggregation Pipelines)           
+
+
+
+
+
+
+
+
+
+
+*********************************** Video-21 (How to write sub pipelines and routes) ************************
+Things we have done in this video:
+
+        -> Sub pipelines likhi hai uske notes too maine code mai hee likh diye hai. See code from 'user.controller.js' file and sub-pipelines hamne 'getWatchHistory' wale method mai use kri hai. 
+
+
+        -> Afte writing all the controllers now lets write our 'routes' So go in our 'user.routes.js' file.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
